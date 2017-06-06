@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>实现树状带复选框的操作</title>
+	<!-- 引入zTree相关的样式 -->
+	<link rel="stylesheet" href="css/zTreeStyle.css">
+	<script src="js/jquery-1.8.3.min.js"></script>
+	<!-- 引用zTree对应的和心包和check的对应的包 -->
+	<script src="js/jquery.ztree.core.min.js"></script>
+	<script src="js/jquery.ztree.excheck.min.js"></script>
+
+</head>
+<body>
+	<!-- 容器必须是zTree，请注意设置 zTree 的容器样式 class="ztree" -->
+	<script>
+		var setting = {
+			check: {
+				enable: true
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			}
+		};
+		var zNodes =[
+			{ id:1, pId:0, name:"全选", open:true},
+			{ id:11, pId:1, name:"母婴专区", open:false},
+			{ id:111, pId:1, name:"美妆个护",open:false},
+			{ id:112, pId:1, name:"健康生活"},
+			{ id:113, pId:112, name:"零食"},
+			{ id:114, pId:112, name:"保健品"},
+			{ id:115, pId:112, name:"生鲜水果"},
+			{ id:14, pId:1, name:"潮流生活", open:false},
+			{ id:141, pId:14, name:"轻奢包", open:false},
+			{ id:142, pId:14, name:"数码电器", open:false},
+			{ id:15, pId:1, name:"家居日用"},
+			{ id:16, pId:1, name:"环球美食"}
+		];
+		$(document).ready(function(){
+			//用于展现 zTree 的 DOM 容器,setting配置信息，zNodes展示信息
+			$.fn.zTree.init($("#privTree"), setting, zNodes);
+		});
+	</script>
+	<div style="width: 300px;background-color: #dcdcdc;border: 1px solid pink;">
+		<ul id="privTree" class="ztree"></ul>
+	</div>
+</body>
+</html>
