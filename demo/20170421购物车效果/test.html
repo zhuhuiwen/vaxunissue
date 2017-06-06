@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加入购物车效果</title>
+	 <style>
+	   		.shopcart_fly {
+   			    width: 50px;
+			    height: 50px;
+			    overflow: hidden;
+			    position: absolute;
+			    /* display: none; */
+			    opacity: .5;
+			    filter: alpha(opacity=50);
+			    z-index: 999;
+	   		}
+	   </style>
+</head>
+<body>
+		<div class="cart_nav_title" style="">目标位置</div>
+		<!-- 飞入的图片信息开始 -->
+		<div class="shopcart_fly" id="shopcart_fly">
+			<img width="50" height="50" src="shop_cart_logo.png">
+		</div>
+		<!-- 飞入的图片信息结束 -->
+
+		<a href="javascript:void(0);" class="btn-bot-com btn-confirm" onclick="addMx(this)" style="margin-top: 200px;display: inline-block;">保存</a>
+
+
+		<script type="text/javascript" src="jquery-1.8.3.min.js"></script>
+		<script src="parabola.js"></script>
+		<script>
+			// 保存效果
+			function  addMx(obj) {
+				var datademo = "新增信息";
+				var html = '<div class="lh26 pri-have">'+datademo+'</div>';
+
+				$("#privH").append(html);
+				//添加购物车效果
+				addShopcart(obj);
+
+			}
+			function addShopcart(currentObj) {
+				//飞行的物体
+				var eleFlyElement = $("#shopcart_fly")[0];
+				//目标点
+				var eleShopCart = $(".cart_nav_title")[0];
+
+				// 抛物线运动
+				var myParabola = funParabola(eleFlyElement, eleShopCart, {
+					speed: 200,
+					curvature: 0.002,	
+					complete: function() {
+						eleFlyElement.style.display = "none";
+					}
+				});
+
+				if (eleFlyElement && eleShopCart) {
+					// 滚动大小
+					eleFlyElement.style.display = "block";
+					eleFlyElement.style.left = $(currentObj).offset().left + "px";
+					eleFlyElement.style.top = $(currentObj).offset().top +"px";
+						
+					// 需要重定位
+					myParabola.position().move();
+					var fcl = document.getElementById('shopcart_fly').offsetLeft - 10;
+					document.getElementById('shopcart_fly').style.left=fcl+'px';
+				}
+				var mytop=$(".cart_nav_title").offset().top-200;
+				$('body,html').animate({scrollTop: mytop},800);
+			}
+		</script>
+</body>
+</html>

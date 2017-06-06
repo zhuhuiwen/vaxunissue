@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>单选按钮选中事件</title>
+</head>
+<body>
+	<ul>
+		<li>
+			<label>
+				<input type="radio" name="radio_tj" class="checkradio">
+				人事
+			</label>
+			<label>
+				<input type="radio" name="radio_tj" class="checkradio">
+				客服
+			</label>
+		</li>
+	</ul>
+	<script src="jquery-1.8.3.min.js"></script>
+	<script type="text/javascript">  
+                      
+		// 判断个函数   以上 5 个Radio 那个为选中状态  
+		function judgeRadioClicked()  
+		{  
+		    //获得 单选选按钮name集合  
+		    var radios = document.getElementsByName("radio_tj");                              
+		    //根据 name集合长度 遍历name集合  
+		    for(var i=0;i<radios.length;i++)  
+		    {   
+		        //判断那个单选按钮为选中状态  
+		        if(radios[i].checked)  
+		        {  
+		            //弹出选中单选按钮的值  
+		            alert(radios[i].value+"第"+i+"个");  
+		        }   
+		    }   
+		}  
+
+		$(".checkradio").on("click",function(){
+			judgeRadioClicked();
+		});
+                              
+</script>  
+</body>
+</html>

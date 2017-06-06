@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		li {
+			list-style: none;
+		}
+		a {
+			text-decoration: none;
+		}
+		.clearfix:after {
+			content: "";
+		    height: 0;
+		    line-height: 0;
+		    clear: both;
+		    display: block;
+		    visibility: hidden;
+		}
+				/*公用tab样式切换开始*/
+		.tab-style .tab-menu li {
+		  float: left;
+		  cursor: pointer;
+		  -webkit-box-sizing: border-box;
+		          box-sizing: border-box;
+		  width: 15%;
+		  height: 42px;
+		  line-height: 42px;
+		  text-align: center;
+		  position: relative;
+		  border: 1px solid #8d94b8;
+		  border-bottom: none;
+		  font-size: 14px;
+		  margin-right: 1%; }
+		  .tab-style .tab-menu li.current {
+		    border: 1px solid #2876fc;
+		    border-top: 3px solid #2876fc;
+		    border-bottom: none;
+		    background-color: #ffffff; }
+		    .tab-style .tab-menu li.current:first-child {
+		      border-left: none; }
+
+		.tab-style .tab-box {
+		  background-color: #fff;
+		  border-top: 1px solid #2876fc;
+		  margin-top: -1px; }
+		  .tab-style .tab-box .hide {
+		    display: none; }
+
+		/*公用tab样式切换结束*/
+	</style>
+</head>
+<body>
+	<div class="wrapcontent">
+			<div class="tab-style tab-wrap contentpl">
+				<ul class="tab-menu clearfix">
+					<li class="current">新增采购</li>
+					<li>采购状态</li>
+				</ul>
+
+				<div class="tab-box">
+				<div>
+					<ul>
+						<li>
+							<a href="">新增采购</a>
+						</li>
+						<li>
+							<a href="">新增采购</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="hide">
+					<ul>
+						<li>
+							<a href="">采购状态</a>
+						</li>
+						<li>
+							<a href="">采购状态</a>
+						</li>
+					</ul>
+				</div>
+				</div>
+			</div>
+		</div>
+		<script src="jquery-1.8.3.min.js"></script>
+		<script>
+			$(function() {
+				function tabs(ele) {
+					// tab_menu tab菜单，tab_menu li对应的子菜单
+					// tab_box 具体的内容  tab_box div每一个子菜单对应的内容
+					var tabWrap = $(ele).parent().parent(".tab-wrap"),
+					menu = tabWrap.children( 'ul.tab-menu' ),
+					items = menu.find( 'li' ),
+					tabBox = tabWrap.children( 'div.tab-box' ).children( 'div' );
+					
+					ele.siblings( 'li' )
+						.removeClass( 'current' )
+						.end()
+						.addClass( 'current' );
+						
+					tabBox.siblings( 'div' )
+						.addClass( 'hide' )
+						.end()
+						.eq( ele.index() )
+						.removeClass( 'hide' );
+					
+				}
+				// 对菜单进行点击，将点击的元传参
+				$(".tab-wrap .tab-menu>li").on("click",function() {
+					var ele = $(this);
+					tabs(ele);
+				});
+			});
+		</script>
+</body>
+</html>

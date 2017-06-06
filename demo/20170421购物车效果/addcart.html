@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加入购物车效果</title>
+</head>
+<body>
+	<script>
+		//购买的抛物线，只用于订货页面
+		function addShopcart(currentObj){
+		var eleFlyElement = $("#shopcart_fly")[0], eleShopCart = $(".cart_nav_title")[0];	
+			// 抛物线运动
+			var myParabola = funParabola(eleFlyElement, eleShopCart, {
+				speed: 200,
+				curvature: 0.002,	
+				complete: function() {
+					eleFlyElement.style.display = "none";
+				}
+			});
+			if (eleFlyElement && eleShopCart) {
+				// 滚动大小
+				eleFlyElement.style.display = "block";
+				eleFlyElement.style.left = $(currentObj).offset().left + "px";
+				eleFlyElement.style.top = $(currentObj).offset().top +"px";
+					
+				// 需要重定位
+				myParabola.position().move();
+				var fcl = document.getElementById('shopcart_fly').offsetLeft - 10;
+				document.getElementById('shopcart_fly').style.left=fcl+'px';
+			}
+			var mytop=$(".cart_nav_title").offset().top;
+			$('body,html').animate({scrollTop: mytop},800);
+			
+		}
+
+
+	</script>
+</body>
+</html>

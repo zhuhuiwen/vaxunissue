@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模拟jq中的tab切换</title>
+	<style>
+		* {
+			margin: 0;
+		    padding: 0;
+		    list-style-type: none;
+		}
+		a {
+			color: #333;
+    		text-decoration: none;
+		}
+		.box {
+			width: 400px;
+		    margin: 10px auto 0;
+		    background: #fff;
+		    border: 1px solid #d3d3d3;
+		}
+		.tab-menu {
+			overflow: hidden;
+		}
+		.tab-menu li.current {
+		    border-bottom: 1px solid #093;
+		}
+		.tab-menu li {
+			width: 100px;
+		    float: left;
+		    height: 30px;
+		    line-height: 30px;
+		   
+		    text-align: center;
+		    cursor: pointer;
+		    color: #333;
+    		background: #fff;
+		}
+		.tab-box {
+			padding: 20px;
+		}
+		.tab-box li {
+			height: 24px;
+		    line-height: 24px;
+		    overflow: hidden;
+		}
+		
+		.tab-box .hide {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="box tab-wrap">
+			<ul class="tab-menu">
+				<li class="current">母婴专区</li>
+				<li>美妆个护</li>
+				<li>健康生活</li>
+				<li>数码电器</li>
+			</ul>
+
+			<div class="tab-box">
+				<div>
+					<ul>
+						<li>
+							<a href="https://github.com/zhuhuiwen">母婴专区content</a>
+						</li>
+						<li>
+							<a href="https://github.com/zhuhuiwen">母婴专区content</a>
+						</li>
+						<li>
+							<a href="https://github.com/zhuhuiwen">母婴专区content</a>
+						</li>
+						<li>
+							<a href="https://github.com/zhuhuiwen">母婴专区content</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="hide">
+					<ul>
+						<li>
+							<a href="https://github.com/zhuhuiwen">美妆个护content</a>
+						</li>
+						<li>
+							<a href="https://github.com/zhuhuiwen">美妆个护content</a>
+						</li>
+						<li>
+							<a href="https://github.com/zhuhuiwen">美妆个护content</a>
+						</li>
+						<li>
+							<a href="https://github.com/zhuhuiwen">美妆个护content</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="hide">
+					<ul>
+						<li>
+							<a href="https://github.com/zhuhuiwen">健康生活content</a>
+						</li>
+						<li>
+							<a href="https://github.com/zhuhuiwen">健康生活content</a>
+						</li>
+						<li>
+							<a href="https://github.com/zhuhuiwen">健康生活content</a>
+						</li>
+						<li>
+							<a href="https://github.com/zhuhuiwen">健康生活content</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="hide">
+					<ul>
+						<li>
+							<a href="https://github.com/zhuhuiwen">数码电器content</a>
+						</li>
+						<li>
+							<a href="https://github.com/zhuhuiwen">数码电器content</a>
+						</li>
+						<li>
+							<a href="https://github.com/zhuhuiwen">数码电器content</a>
+						</li>
+						<li>
+							<a href="https://github.com/zhuhuiwen">数码电器content</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+	</div>
+
+		<script src="jquery-1.8.3.min.js"></script>
+		<script>
+			$(function() {
+				function tabs(ele) {
+					// tab_menu tab菜单，tab_menu li对应的子菜单
+					// tab_box 具体的内容  tab_box div每一个子菜单对应的内容
+					var tabWrap = $(ele).parent().parent(".tab-wrap"),
+					menu = tabWrap.children( 'ul.tab-menu' ),
+					items = menu.find( 'li' ),
+					tabBox = tabWrap.children( 'div.tab-box' ).children( 'div' );
+					
+					ele.siblings( 'li' )
+						.removeClass( 'current' )
+						.end()
+						.addClass( 'current' );
+						
+					tabBox.siblings( 'div' )
+						.addClass( 'hide' )
+						.end()
+						.eq( ele.index() )
+						.removeClass( 'hide' );
+					
+				}
+				// 对菜单进行点击，将点击的元传参
+				$(".tab-wrap .tab-menu>li").on("click",function() {
+					var ele = $(this);
+					tabs(ele);
+				});
+			});
+		</script>
+</body>
+</html>
